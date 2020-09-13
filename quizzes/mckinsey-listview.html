@@ -1,0 +1,87 @@
+<!--
+
+1. List View
+
+You are required to create a visual model that explains list insertion. The model must consist of three elements:
+• List display section: The section on the page where the list will be displayed.
+• Text field: A field to provide input for inserting a new element into the list.
+• Button (named "Insert"): Clicking this button inserts a new element at the end of the existing list, the new element
+being the value provided in the text field.
+
+Requirements:
+• No element should be inserted if the text field is empty. When the user clicks the button in case of empty input,
+display the alert with the message "Please provide the valid input".
+• When an element is inserted, reset the input value.
+• Every third element in the list must be displayed in red and the remaining elements in black.
+• Each of the list elements should follow the format <li style="">text to be inserted</fi>.
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>List View</title>
+</head>
+
+<body>
+  <div id="app">
+    <div class="left">
+      <input id="input" type="text" />
+      <button onclick="appendItem()">Insert</button>
+    </div>
+    <div class="right">
+      <ul id="list"></ul>
+    </div>
+  </div>
+
+  <style>
+    #app {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .left {
+      flex: 1;
+    }
+
+    .right {
+      flex: 1;
+    }
+
+    /* li:nth-child(3n) {
+      color: red;
+    } */
+  </style>
+
+  <script>
+    let itemCount = 0
+    const input = document.getElementById('input')
+    const list = document.getElementById('list')
+
+    function appendItem() {
+      const inputValue = input.value
+      if (inputValue === '') {
+        alert('Please provide the valid input')
+        return
+      } else {
+        const newItem = document.createElement('li')
+        newItem.append(inputValue)
+
+        ++itemCount
+        if (itemCount % 3 === 0) {
+          newItem.style = 'color:red;'
+        } else {
+          newItem.style = 'color:black;'
+        }
+
+        list.append(newItem)
+        input.value = ''
+      }
+    }
+  </script>
+</body>
+
+</html>
