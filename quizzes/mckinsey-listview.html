@@ -30,7 +30,7 @@ display the alert with the message "Please provide the valid input".
   <div id="app">
     <div class="left">
       <input id="input" type="text" />
-      <button onclick="appendItem()">Insert</button>
+      <button id="button">Insert</button>
     </div>
     <div class="right">
       <ul id="list"></ul>
@@ -57,30 +57,30 @@ display the alert with the message "Please provide the valid input".
   </style>
 
   <script>
-    let itemCount = 0
-    const input = document.getElementById('input')
-    const list = document.getElementById('list')
-
-    function appendItem() {
-      const inputValue = input.value
-      if (inputValue === '') {
-        alert('Please provide the valid input')
-        return
-      } else {
-        const newItem = document.createElement('li')
-        newItem.append(inputValue)
-
-        ++itemCount
-        if (itemCount % 3 === 0) {
-          newItem.style = 'color:red;'
-        } else {
-          newItem.style = 'color:black;'
-        }
-
-        list.append(newItem)
-        input.value = ''
+    let itemCount = 0;
+    const input = document.getElementById("input");
+    const list = document.getElementById("list");
+    const button = document.getElementById("button");
+    button.addEventListener("click", () => {
+      const inputValue = input.value;
+      if (/^[\s]*$/.test(inputValue)) {
+        alert("Please provide the valid input");
+        return;
       }
-    }
+
+      const newItem = document.createElement("li");
+      newItem.append(inputValue);
+
+      ++itemCount;
+      if (itemCount % 3 === 0) {
+        newItem.style = "color:red;";
+      } else {
+        newItem.style = "color:black;";
+      }
+
+      list.append(newItem);
+      input.value = "";
+    });
   </script>
 </body>
 
